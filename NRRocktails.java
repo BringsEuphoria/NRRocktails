@@ -76,7 +76,7 @@ public class NRRocktails extends Script implements Paintable  {
 
 			@Override
 			public void execute() {
-				if (path !=null) {
+				if (path != null && !path.hasReached()) {
 					path.traverse();
 					Time.sleep(2000);
 			}
@@ -104,21 +104,21 @@ public class NRRocktails extends Script implements Paintable  {
 			
 			@Override
 			public boolean activate() {
-				if(Inventory.getCount() == 28 && Players.getMyPlayer().getAnimation() == -1) {
-					return true;	
-				}
-				
-				return false;
+			
+			return Inventory.getCount() == 28 && Players.getMyPlayer().getAnimation() == -1;	
+			
 			}
 
 			@Override
 			public void execute() {		
-				if (path !=null) {
+				if (path != null && !path.hasReached()) {
 					path.traverse();
 					Time.sleep(2000);
 			}
+			if (!Bank.isOpen()){
 				Bank.open();	
 				Time.sleep(2000);
+			}
 	            
 				//THIS CODE IS EXTREMLY POORLY DESIGNED, PLEASE IGNORE IT
 				if (Bank.isOpen()) {
@@ -180,7 +180,7 @@ public class NRRocktails extends Script implements Paintable  {
 	        g.drawString("" + c, 315, 414);
 	        g.drawString("" + c*.1 + "M", 315, 449);
 	        g.drawImage(img2, 372, 358, null);
-
+                
 	    }
 	    //END: Code generated using Enfilade's Easel
 }
